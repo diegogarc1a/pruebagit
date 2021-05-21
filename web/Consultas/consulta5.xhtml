@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../TemplatePrincipal/PlantillaPrincipal.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+          
+        <h1 align="center">Consulta de balance trimestral</h1>
+        
+        <h:form>
+            <h:outputLabel value="Trimestre: " style="font-size: 25px;" />
+            <p:selectOneMenu id="optionTrimestre" value="#{consultaobtenerbalancetrimestral.trimestre}" style="font-size: 15px;">
+                <f:selectItem itemLabel="Seleccione" itemValue="0"/>
+                <f:selectItem itemLabel="1°" itemValue="1"/>
+                <f:selectItem itemLabel="2°" itemValue="2"/>
+                <f:selectItem itemLabel="3°" itemValue="3"/>
+                <f:selectItem itemLabel="4°" itemValue="4"/>
+                <p:ajax event="change" update="tblBalance" listener="#{consultaobtenerbalancetrimestral.llenarBalance()}" />
+            </p:selectOneMenu>
+            
+            <h:outputLabel value="Año: " style="font-size: 25px;" />
+            <p:selectOneMenu id="optionAño" value="#{consultaobtenerbalancetrimestral.año}" style="font-size: 15px;">
+                <f:selectItem itemLabel="Seleccione" itemValue="0"/>
+                <f:selectItem itemLabel="2021" itemValue="2021"/>
+                <f:selectItem itemLabel="2020" itemValue="2020"/>
+               
+                <p:ajax event="change" update="tblBalance" listener="#{consultaobtenerbalancetrimestral.llenarBalance()}" />
+            </p:selectOneMenu>
+            
+            
+            <p:dataTable id="tblBalance" value="#{consultaobtenerbalancetrimestral.lstBalance}" var="bal"
+                         emptyMessage="No existen registros en este trimestre" style="margin-top: 20px">
+                <p:column>
+                    <f:facet name="header" >
+                        <p:outputLabel value="Balance"/>
+                    </f:facet>
+                    <p:outputLabel value="#{bal}$" style="font-size: 35px; display: block; width:100%; text-align:center;" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

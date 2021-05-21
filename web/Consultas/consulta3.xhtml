@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../TemplatePrincipal/PlantillaPrincipal.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h1 align="center">Consulta de lavados por mes</h1>
+
+        <h:form>
+            <h:outputLabel value="Mes: " style="font-size: 25px;" />
+            <p:selectOneMenu id="optionMes" value="#{consultalavadospormes.mes}" required="true">
+                <f:selectItem itemLabel="Seleccione" itemValue="0"/>
+                <f:selectItem itemLabel="ENERO" itemValue="1"/>
+                <f:selectItem itemLabel="FEBRERO" itemValue="2"/>
+                <f:selectItem itemLabel="MARZO" itemValue="3"/>
+                <f:selectItem itemLabel="ABRIL" itemValue="4"/>
+                <f:selectItem itemLabel="MAYO" itemValue="5"/>
+                <f:selectItem itemLabel="JUNIO" itemValue="6"/>
+                <f:selectItem itemLabel="JULIO" itemValue="7"/>
+                <f:selectItem itemLabel="AGOSTO" itemValue="8"/>
+                <f:selectItem itemLabel="SEPTIEMBRE" itemValue="9"/>
+                <f:selectItem itemLabel="OCTUBRE" itemValue="10"/>
+                <f:selectItem itemLabel="NOVIEMBRE" itemValue="11"/>
+                <f:selectItem itemLabel="DICIEMBRE" itemValue="12"/>
+                <p:ajax event="change" update="tblLavado" listener="#{consultalavadospormes.llenarLavado()}" />
+            </p:selectOneMenu>
+            
+            <h:outputLabel value="Año: " style="font-size: 25px;" />
+            <p:selectOneMenu id="optionAño" value="#{consultalavadospormes.año}" required="true">
+                <f:selectItem itemLabel="Seleccione" itemValue="0"/>
+                <f:selectItem itemLabel="2021" itemValue="2021"/>
+                <f:selectItem itemLabel="2020" itemValue="2020"/>
+               
+                <p:ajax event="change" update="tblLavado" listener="#{consultalavadospormes.llenarLavado()}" />
+            </p:selectOneMenu>
+
+            <p:dataTable id="tblLavado" value="#{consultalavadospormes.lstlavado}" var="lavado" 
+                         emptyMessage="No existen registros en este mes" style="margin-top: 20px">
+                <f:facet name="header">
+                    Lista de Lavados
+                </f:facet>
+                <p:column>
+                    <f:facet name="header">
+                        <p:outputLabel value="Empleado"/>
+                    </f:facet>
+                    <p:outputLabel value="#{lavado.empleado.nombreempleado} #{lavado.empleado.apellidoempleado} "/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <p:outputLabel value="Cliente"/>
+                    </f:facet>
+                    <p:outputLabel value="#{lavado.vehiculo.cliente.nombrecliente} #{lavado.vehiculo.cliente.apellidocliente} "/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <p:outputLabel value="Placa vehiculo" />
+                    </f:facet>
+                    <p:outputLabel value="#{lavado.vehiculo.placa}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <p:outputLabel value="Tipo vehiculo"/>
+                    </f:facet>
+                    <p:outputLabel value="#{lavado.vehiculo.tipovehiculo.descripcionvehiculo}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <p:outputLabel value="Tipo de Lavado"/>
+                    </f:facet>
+                    <p:outputLabel value="#{lavado.precioservicio.servicios.nombreservicio}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <p:outputLabel value="Fecha"/>
+                    </f:facet>
+                    <p:outputLabel value="#{lavado.fecha}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

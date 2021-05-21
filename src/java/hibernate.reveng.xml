@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="bdcarwash2" match-schema="public"/>
+  <table-filter match-name="lavado"/>
+  <table-filter match-name="precioservicio"/>
+  <table-filter match-name="cargo"/>
+  <table-filter match-name="servicios"/>
+  <table-filter match-name="departamento"/>
+  <table-filter match-name="empleado"/>
+  <table-filter match-name="municipio"/>
+  <table-filter match-name="vehiculo"/>
+  <table-filter match-name="cliente"/>
+  <table-filter match-name="tipovehiculo"/>
+</hibernate-reverse-engineering>
